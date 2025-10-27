@@ -1,9 +1,13 @@
 mod urls;
-use crate::urls::api_ping;
+mod utils;
+
+use crate::urls::api_methods::{
+    about_wallet,
+};
 
 
 
 fn main(){
-    println!("Enter to main");
-    api_ping();
+    println!("Bot is started");
+    let _ = about_wallet();
 }
