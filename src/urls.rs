@@ -8,7 +8,7 @@ pub mod api_methods{
         env,
         };
     use chrono;
-    use crate::utils::create_signature;
+    use crate::utils::encryption::create_signature;
 
 
 
@@ -26,6 +26,7 @@ pub mod api_methods{
         let url = format!("https://api.binance.com/api/v3/account?timestamp={}&signature={}", timestamp, signature);
 
         let output = Command::new("curl")
+            .arg("-H")
             .arg(format!("X-MBX-APIKEY: {}", api_key))
             .arg(&url)
             .output()?;

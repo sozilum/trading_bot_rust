@@ -1,14 +1,21 @@
-use sha2::{Sha256, Digest};
 
-pub fn create_signature(secret_api_key: &str, data: &str ) -> String{
-    let key = secret_api_key.as_bytes();
-    let message = data.as_bytes();
+pub mod encryption{
 
-    let mut hasher = Sha256::new();
-    hasher.update(key);
-    hasher.update(message);
+    use sha2::{Sha256, Digest};
+    use hmac::{Hmac, Mac};
 
-    let result = hasher.finalize();
+    type HmacSha256 = Hmac<Sha256>;
+    
+    pub fn create_signature(secret_api_key: &str, data: &str ) -> String{
+        
+        let mut mac = HmacSha256::new_from_slice(secret_api_key.as_bytes()).expect("Key maybe any size");
+        mac.update(data.as_bytes());
+                
+        let result = mac.finalize();
+        let code_bytes = result.into_bytes();
 
-    result.iter().map(|byte| format!("{:02x}", byte)).collect()
+
+        
+        code_bytes.iter().map(|byte| format!("{:02x}", byte)).collect()
+    }
 }
