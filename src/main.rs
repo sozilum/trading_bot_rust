@@ -1,5 +1,6 @@
 mod urls;
 mod utils;
+mod typical_tasks;
 
 use crate::urls::api_methods::{
     about_wallet,
@@ -9,5 +10,5 @@ use crate::urls::api_methods::{
 
 fn main(){
     println!("Bot is started");
-    let _ = about_wallet();
+    // here is the place for loop 
 }

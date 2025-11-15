@@ -1,0 +1,1 @@
+// this file is for managment and and automatization trading process, traging algorithm
